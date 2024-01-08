@@ -24,7 +24,7 @@ const config = {
   CryptoKey: '', //crypto.randomBytes(32).toString("hex");
   CryptoIv: '', //crypto.randomBytes(16).toString("hex");
   CryptoAlgorithm: 'aes-256-cbc',
-  RedisServer: 'redis://localhost:6379',
+  RedisServer: '',
   RedisCacheTimeSeconds: 600,
   ResourcePrefix: 'http://127.0.0.1:3000',
   // ResourcePrefix: 'local',
