@@ -1,0 +1,39 @@
+# Composition suited for development only
+version: '3.9'
+
+services:
+  dev_service:
+    build:
+      context: .
+      dockerfile: ./application/Dockerfile.dev
+    command: npm run dev
+    container_name: ucp_dev_service
+    ports:
+      - 3000:3000
+    volumes:
+      - ./application:/srv
+  api_service:
+    build:
+      context: .
+      dockerfile: ./application/Dockerfile.dev
+    command: npm run server
+    container_name: ucp_api_service
+    depends_on:
+      - redis
+    environment:
+      - RedisServer=redis://redis:6379
+    ports:
+      - 8080:8080
+  example_app:
+    build:
+      context: .
+      dockerfile: ./example/Dockerfile.dev
+    command: npm run start
+    container_name: ucp_web_service
+    ports:
+      - 8088:8088
+  redis:
+    image: redis:latest
+    container_name: ucp_redis_service
+    ports:
+      - 6379:6379
